@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
             }
-        })
+        });
     }
 
     runGame("addition");
@@ -39,9 +39,11 @@ function checkAnswer() {
     let isCorrect = userAnswer === calculatedAnswer[0];
 
     if (isCorrect) {
-        alert("Hey! You got it right! :D")
+        alert("Hey! You got it right! :D");
+        incrementScore();
     } else {
-        alert (`Awwww.... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`)
+        alert(`Awwww.... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
+        incrementWrongAnwer();
     }
 
     runGame(calculatedAnswer[1]);
@@ -55,21 +57,23 @@ function calculateCorrectAnswer() {
 
     if (operator === "+") {
         return [operand1 + operand2, "addition"];
-        } else {
-            alert(`Unimplemented operator ${operator}`);
-            throw `Unimplemented operator ${operator}. Aborting!`;
-        }
+    } else {
+        alert(`Unimplemented operator ${operator}`);
+        throw `Unimplemented operator ${operator}. Aborting!`;
     }
+}
 
 
 
 function incrementScore() {
-
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
 }
 
 
 function incrementWrongAnwer() {
-
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore;
 }
 
 
